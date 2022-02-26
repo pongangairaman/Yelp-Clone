@@ -1,8 +1,11 @@
 import React from 'react'
+import DetailPage from '../components/detailPage';
 
 function Detail() {
   return (
-    <div><h1>This is Detail Page</h1></div>
+    <div>
+      <DetailPage/>
+    </div>
   )
 }
 

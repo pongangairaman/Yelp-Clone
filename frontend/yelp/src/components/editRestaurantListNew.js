@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 import axios from 'axios';
 import {Button,Input} from 'antd';
 import 'antd/dist/antd.css';
@@ -11,6 +11,26 @@ function EditRestaurantListNew(props) {
     const [name,setName] = useState([]);
     const [location,setLocation] = useState([]);
     const [price_range,setPrice_range] = useState([]);
+
+    const getRestaurantListNew = async (id)=>{
+    try {
+        axios.get(`http://localhost:5001/restaurants/${id}`)
+        .then(
+          res =>{
+            console.log(res.data.data);
+            const body = res.data.data;
+            setName(body.restaurant.name);
+            setLocation(body.restaurant.location);
+            setPrice_range(body.restaurant.price_range);
+          }
+        )
+    } catch (err) {
+        console.error(err.mesage);
+    }
+}
+    useEffect(()=>{
+        getRestaurantListNew(id);
+    },[])
 
     const onUpdate = (e)=>{
         e.preventDefault();
